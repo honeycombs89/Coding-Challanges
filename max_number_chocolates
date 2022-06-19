@@ -1,0 +1,87 @@
+
+Problem:
+Given the following three values, the task is to find the total number of maximum chocolates you can eat.
+
+let money = Money you have to buy chocolates
+let price = Price of a chocolate
+let wrap = Number of wrappers to be returned for getting one extra chocolate.
+
+You may assume that all given values are positive integers and greater than 1.
+
+Input: money = 15, price = 1, wrap = 3
+Output: 22
+1 piece = 1 dollar
+3 wrap = 1 piece
+15 dollars = 15 pieces, return those 15 wrappers and get 5 pieces, return 3 wrappers get 1 piece, give 1 dollar and get 1 piece.
+max pieces = 22
+
+Input: dollar = 16, price = 2, wrap = 2
+Output: 15
+16/2=8, 2*8=16 == 8 pieces
+2 wrap = 1 piece == 8 wrap give you 4 pieces
+return 2 wraps and get 1 piece
+
+//Recursion
+function maxCount(choc,wrap){
+  //if num of choc is less than num of wrappers
+  if(choc < wrap){
+    return 0
+  }
+  //immediate newChoc using wrappers of chocolate
+  let newChoc = choc / wrap
+  // "newchoc +chco % wrap"
+  return newChoc + maxCount(newChoc + choc % wrap, wrap){
+    //returns max num of choc we can eat with given money, price of choc, num of wrappers for 1 piece of chocolate
+    let choc = money/price
+    //maxCount returns num of choc from given num of chocolate
+    return choc + maxCount(choc,wrap)
+  }
+  
+  
+  //Driver CODE
+  let money = 15 //total Money
+  let price = 1 //cost per piece
+  let wrap = 3 // num of wraps per piece
+
+  console.log(Math.floor(maxCount(money, price, wrap)))
+}
+
+
+//Find initial number of chocolates by
+//dividing the amount with per piece cost.
+//i.e. choc = money / price
+
+//then apply below formula
+//choc += (choc - 1)/(wrap - 1)
+//we can get the result by just reducing the values of chocolates and wrappers by 1 and then
+//divide them to get the result (choc-1)/(wrap-1)
+
+// More efficient Javascript program to find maximum
+// number of chocolates:
+// Returns maximum number of chocolates
+// we can eat with given money, price
+// of chocolate and number of wrapprices
+// required to get a chocolate.
+
+function maxCountChoc(money, price, wrap){
+  //corner case
+  if(money < price){
+    return 0
+  }
+  // First find number of chocolates
+  // that can be purchased with the
+  // given amount
+  let choc = parseInt(money/price, 10){
+
+  //Add number of chocolates with the chocolates gained by wrappers
+  choc = choc + parseInt((choc - 1)/(wrap - 1), 10)
+  return choc
+}
+
+//Driver code
+
+let money = 15 //total money
+let price = 1 //cost per piece
+let wrap = 3 // num of wrappers per 1 piece
+console.log(maxCountChoc(money, price, wrap)) // exchanged for 1 piece of chocolate
+//Output: 22
